@@ -1,40 +1,29 @@
-const express= require('express');
+const express = require('express');
+const cors = require('cors');
+const employeeRoutes = require('./routes/employeeRoutes');
+const { connectToDatabase } = require('./controllers/dbController'); // Import database connection logic
+
 const app = express();
 
-app.use('/api/employees', (req, res, next) => {
-  const employees = [
-    {
-        "_id": {
-          "$oid": "6784e397ba400abaf0cb241b"
-        },
-        "employeeId": "EMP001",
-        "firstName": "FirstName1",
-        "lastName": "LastName1",
-        "email": "firstname1.lastname1@example.com",
-        "phone": "359-470-5534",
-        "department": "Operations",
-        "designation": "Backend Developer",
-        "dateOfJoining": {
-          "$date": "2021-10-15T00:00:00.000Z"
-        },
-        "salary": 85022.11,
-        "address": {
-          "street": "531 Cedar Drive",
-          "city": "Evergreen",
-          "state": "WA",
-          "zip": "98804"
-        },
-        "skills": [
-          "Google Analytics",
-          "React",
-          "DevOps",
-          "Accounting",
-          "PHP"
-        ],
-        "isActive": false
-      }
-    ];
+app.use(cors());
+app.use(express.json());
+
+
+connectToDatabase();
+
+app.use('/api/employeeManagement', employeeRoutes);
+
+
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
 });
 
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).json({
+    message: error.message
+  });
+});
 
 module.exports = app;
