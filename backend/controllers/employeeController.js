@@ -38,10 +38,7 @@ const addEmployee = (req, res, next) => {
 const getEmployees = (req, res, next) => {
   Employee.find()
     .then((documents) => {
-      res.status(200).json({
-        message: 'Employees fetched successfully',
-        employees: documents,
-      });
+      res.status(200).json(documents);
     })
     .catch((error) => {
       res.status(500).json({

@@ -1,0 +1,48 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.table-overrides((
+    background-color: orange,
+    header-headline-color: red,
+  ));
+}
+
+table{
+    margin: 10%;
+    // padding: 2%;
+    border: 1px solid black;
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: left;
+  }
+  
+  .modal button {
+    margin-top: 15px;
+  }
+  
